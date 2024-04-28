@@ -1,0 +1,21 @@
+- name: Set up dev environment
+  hosts: localhost
+  tasks:
+  - name: Install node and npm
+    homebrew:
+      name:
+        - node
+        - npm
+      state: present
+  - name: Install n via npm
+    npm:
+      name: n
+      global: yes
+      state: present
+  - name: Set node to lts via n
+    become: true
+    command: n lts
+    args:
+      creates: "/usr/local/n/versions/node/{{ ansible_date_time.year }}"
+    environment:
+      PATH: "/usr/local/bin:{{ ansible_env.PATH }}"

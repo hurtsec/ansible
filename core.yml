@@ -1,0 +1,21 @@
+- name: Ensure homebrew is installed
+  hosts: localhost
+  become: true
+  gather_facts: yes
+  vars:
+    intel_brew_path: /usr/local/bin/brew
+    arm_brew_path: /opt/homebrew/bin/brew
+  tasks:
+  - name: Check if homebrew is installed on Apple Silicon
+    stat:
+      path: "{{ arm_brew_path }}"
+    register: homebrew_arm_stat
+    when: ansible_architecture == "arm64"
+  - name: Check if homebrew is installed on Intel
+    stat:
+      path: "{{ intel_brew_path }}"
+    register: homebrew_intel_stat
+    when: ansible_architecture == "x86_64"
+  - name: Install homebrew
+    shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    when: not homebrew_intel_stat.stat.exists and not homebrew_arm_stat.stat.exists
