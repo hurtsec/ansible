@@ -17,4 +17,4 @@
   - include: tasks/core.yml
   - include: tasks/ssh.yml
   - include: tasks/git.yml
-  - include: tasks/node-core.yml
+  - include: tasks/node.yml
