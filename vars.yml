@@ -8,3 +8,5 @@ dest_key: "{{ home }}/.ssh/{{ ssh_key_filename }}"
 config: "{{ lookup('ansible.buildin.env', 'XDG_CONFIG') }}"
 personal: "{{ home }}/personal"
 dev: "{{ personal }}/dev"
+intel_brew_path: /usr/local/bin/brew
+arm_brew_path: /opt/homebrew/bin/brew

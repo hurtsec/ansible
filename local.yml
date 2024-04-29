@@ -1,6 +1,18 @@
 - hosts: localhost
+  gather_facts: yes
+  vars_prompt:
+  - name: authenticator_pin
+    prompt: "Enter authenticator pin"
+    private: true
+  - name: ssh_key_password
+    prompt: "Enter a password for the ssh key"
+    private: true
+  - name: ssh_key_password_repeat
+    prompt: "Enter the password again"
+    private: true
   tasks:
   - name: Include main vars
     ansible.builtin.include_vars:
       file: vars.yml
+  - include: tasks/core.yml
   - include: tasks/ssh.yml

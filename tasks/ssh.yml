@@ -1,34 +1,35 @@
+- name: Check if SSH Agent is running
+  command: pgrep -x ssh-agent
+  register: ssh_agent_running
+  failed_when: false
+  changed_when: false
+  ignore_errors: true
+- name: Start SSH Agent
+  shell: eval "$(ssh-agent -s)"
+  when: ssh_agent_running.rc != 0
 - name: Ensure .ssh directory exists
   file:
-    dest: "{{ dest_key | dirnmae }}"
+    dest: "{{ dest_key | dirname }}"
     mode: 0700
     state: directory
   tags:
     - dotfiles
     - install
     - ssh
-- name: Install ssh key
-  copy:
-    src: "{{ source_key }}"
-    dest: "{{ dest_key }}"
-    mode: 0600
-  tags:
-    - dotfiles
-    - install
-    - ssh
-- name: Install ssh key public
-  copy:
-    src: "{{ source_key }}.pub"
-    dest: "{{ dest_key }}.pub"
-    mode: 0644
-  tags:
-    - dotfiles
-    - install
-    - ssh
-- name: Set authorized key took from file
-  authorized_key:
-    user: "{{ user }}"
-    state: present
-    key: "{{ home }}/.ssh/{{ ssh_key_filename }}"
-  with_fileglob:
-  - "{{ home }}/.ssh/*.pub"
+- name: Download SSH Key from Yubikey
+  expect:
+    command: ssh-keygen -K
+    chdir: ~/.ssh
+    responses:
+      (?i)PIN: "{{ authenticator_pin }}"
+      (?i)Enter passphrase: "{{ ssh_key_password }}"
+      (?i)same passphrase: "{{ ssh_key_password_repeat }}"
+    timeout: 30
+- name: Rename Public Key
+  shell: mv ./id_ed25519_sk_rk_*.pub ./id_ed25519_sk.pub
+  args:
+   chdir: ~/.ssh
+- name: Rename Private Key
+  shell: mv ./id_ed25519_sk_rk_* ./id_ed25519_sk
+  args:
+    chdir: ~/.ssh
