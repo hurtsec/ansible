@@ -1,0 +1,19 @@
+- name: Install node and npm
+  homebrew:
+    name: node
+    state: present
+  tags:
+    - install
+    - node
+- name: Install N
+  npm:
+    name: n
+    global: yes
+  tags:
+    - install
+    - node
+- name: Install correct version of Node
+  shell: n lts
+  tags:
+    - install
+    - node
