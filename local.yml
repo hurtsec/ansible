@@ -18,3 +18,4 @@
   - include: tasks/ssh.yml
   - include: tasks/git.yml
   - include: tasks/node.yml
+  - include: tasks/npm.yml

@@ -1,0 +1,32 @@
+- name: Install eslint
+  npm:
+    name: eslint
+    state: present
+    global: yes
+  tags:
+   - install
+   - node
+- name: Install Typescript Language Server
+  npm:
+    name: typescript-language-server
+    state: present
+    global: yes
+  tags:
+    - install
+    - node
+- name: Install Typescript
+  npm:
+    name: typescript
+    state: present
+    global: yes
+  tags:
+    - install
+    - node
+- name: Install TS-Node
+  npm:
+    name: ts-node
+    state: present
+    global: yes
+  tags:
+    - install
+    - node
