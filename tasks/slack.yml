@@ -1,0 +1,28 @@
+- name: Check if Slack is Installed outside of Brew
+  stat:
+    path: /Applications/Slack.app
+  register: slack_stat  
+- name: Remove existing Slack installs
+  command: rm -rf /Applications/Slack.app
+  become: yes
+  become_method: sudo
+  when: slack_stat.stat.exists
+- name: Remove Slack Support Files
+  command: rm -rf "{{ item }}"
+  with_items:
+    - "{{ home }}/Library/Application Support/Slack"
+    - "{{ home }}/Library/Caches/com.tinyspeck.slackmacgap"
+    - "{{ home }}/Library/Preferences/com.tinyspeck.slackmacgap.plist"
+    - "{{ home }}/Library/Saved Application State/com.tinyspeck.slackmacgap.savedState"
+  become: yes
+  become_method: sudo
+  when: slack_stat.stat.exists
+- name: Empty Slack Files from Trash
+  command: rm rf "{{ home }}/.Trash/*"
+  become: yes
+  become_method: sudo
+  when: slack_stat.stat.exists
+- name: Install Slack
+  homebrew_cask:
+    name: slack
+    state: present

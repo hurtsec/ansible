@@ -20,3 +20,4 @@
   - include: tasks/node.yml
   - include: tasks/npm.yml
   - include: tasks/zsh.yml
+  - include: tasks/slack.yml
