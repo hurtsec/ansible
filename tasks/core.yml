@@ -20,6 +20,7 @@
     name: 
     - libfido2
     - openssh
+    - keychain
     state: present
 - name: Install necessary pip packages
   pip:
