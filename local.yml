@@ -21,3 +21,4 @@
   - include: tasks/npm.yml
   - include: tasks/zsh.yml
   - include: tasks/slack.yml
+  - include: tasks/personal-project.yml
