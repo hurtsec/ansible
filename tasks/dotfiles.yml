@@ -19,7 +19,7 @@
     - dotfiles
     - stow
 - name: Stow .dotfiles
-  command: echo "TODO" 
+  command: ./macos 
   args:
     chdir: "{{ home }}/.dotfiles"
   tags:
