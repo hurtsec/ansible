@@ -14,11 +14,12 @@
   - name: Include main vars
     ansible.builtin.include_vars:
       file: vars.yml
-  - include: tasks/core.yml
-  - include: tasks/ssh.yml
-  - include: tasks/git.yml
-  - include: tasks/node.yml
-  - include: tasks/npm.yml
-  - include: tasks/zsh.yml
-  - include: tasks/slack.yml
-  - include: tasks/personal-project.yml
+#  - include: tasks/core.yml
+#  - include: tasks/ssh.yml
+#  - include: tasks/git.yml
+#  - include: tasks/node.yml
+#  - include: tasks/npm.yml
+#  - include: tasks/zsh.yml
+#  - include: tasks/slack.yml
+#  - include: tasks/personal-project.yml
+  - include: tasks/gui-apps.yml
