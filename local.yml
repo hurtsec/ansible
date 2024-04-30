@@ -24,3 +24,4 @@
   - include: tasks/personal-project.yml
   - include: tasks/gui-apps.yml
   - include: tasks/dotfiles.yml
+  - include: tasks/productivity.yml

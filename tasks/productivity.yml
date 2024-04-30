@@ -1,0 +1,24 @@
+- name: Install Packages
+  homebrew:
+    name:
+      - tmux
+      - wireshark
+      - fzf
+      - xclip
+      - tldr
+      - ripgrep
+  tags:
+    - install
+    - productivity
+- name: Install GUI Apps
+  homebrew_cask:
+    name:
+      - gimp
+      - keycastr
+      - shottr
+      - 1password
+      - warp
+      - visual-studio-code
+  tags:
+    - install
+    - productivity
