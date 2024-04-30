@@ -1,5 +1,0 @@
-- name: Ensure homebrew is installed
-  hosts: localhost
-  become: true
-  gather_facts: yes
-  tasks:
