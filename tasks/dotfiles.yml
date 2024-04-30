@@ -1,0 +1,28 @@
+- name: Install GNU Stow
+  homebrew:
+    name: stow
+    state: present
+  tags:
+    - install
+    - dotfiles
+    - stow
+- name: Clone .dotfiles
+  ansible.builtin.git:
+    repo: "git@github.com:hurtsec/.dotfiles.git"
+    dest: "{{ home }}/.dotfiles"
+    recursive: yes
+    update: yes
+    accept_hostkey: yes
+    version: main 
+  tags:
+    - install
+    - dotfiles
+    - stow
+- name: Stow .dotfiles
+  command: echo "TODO" 
+  args:
+    chdir: "{{ home }}/.dotfiles"
+  tags:
+    - install
+    - dotfiles
+    - stow
