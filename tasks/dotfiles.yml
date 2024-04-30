@@ -19,9 +19,13 @@
     - dotfiles
     - stow
 - name: Stow .dotfiles
-  command: ./macos 
+  command: stow -D {{ item }} && stow {{ item }} 
   args:
     chdir: "{{ home }}/.dotfiles"
+  with_items:
+  - bin
+  - tmux
+  - zsh
   tags:
     - install
     - dotfiles
