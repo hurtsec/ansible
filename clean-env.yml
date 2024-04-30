@@ -1,0 +1,48 @@
+- hosts: localhost
+  name: Remove all installs and clean environment
+  gather_facts: yes
+  tasks:
+  - name: Uninstall npm packages
+    ansible.builtin.command:
+      cmd: "npm uninstall -g {{ item }}"
+    with_items:
+    - "eslint"
+    - "typescript-language-server"
+    - "typescript"
+    - "ts-node" 
+  - name: Uninstall node and npm
+    ansible.builtin.command:
+      cmd: rm -rf /usr/local/Cellar/node
+    become: true
+  - name: Remove node related bins
+    ansible.builtin.command:
+      cmd: "rm /usr/local/{{ item }}" 
+    with_items:
+    - "lib/node_modules/n/bin/n"
+    - "bin/n"
+    - "bin/node"
+  - name: Uninstall oh_my_zsh
+    ansible.builtin.command:
+      cmd: uninstall_oh_my_zsh
+  - name: Uninstall GUI Applications
+    ansible.builtin.homebrew_cask:
+      name:
+      - brave-browser
+      - gimp
+      - keycastr
+      - shottr
+      - 1password
+      - slack
+      - warp
+      - visual-studio-code
+      state: absent
+  - name: Uninstall core utils
+    ansible.builtin.homebrew:
+      name:
+      - tmux
+      - wireshark
+      - fzf
+      - xclip
+      - tldr
+      - ripgrep
+      state: absent
