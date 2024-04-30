@@ -12,6 +12,15 @@
   tags:
     - install
     - node
+- name: Check that npm global packages are installed in $PATH
+  ansible.builtin.command:
+    cmd: which n
+  register: n_result
+  ignore_errors: true
+- name: Re-link node if npm global packages are not in $PATH
+  ansible.builtin.command:
+    cmd: brew unlink node && brew link node --overwrite
+  when: n_result.rc != 0
 - name: Install correct version of Node
   shell: n lts
   tags:
