@@ -9,6 +9,7 @@
       - ripgrep
       - jq
       - koekeishiya/formulae/skhd
+      - koekeishiya/formulae/yabai
   tags:
     - install
     - productivity
