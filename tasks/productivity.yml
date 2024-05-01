@@ -8,6 +8,7 @@
       - tldr
       - ripgrep
       - jq
+      - koekeishiya/formulae/skhd
   tags:
     - install
     - productivity

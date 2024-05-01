@@ -14,6 +14,8 @@
   - name: Include main vars
     ansible.builtin.include_vars:
       file: vars.yml
+    tags:
+    - reqd
   - include: tasks/core.yml
   - include: tasks/ssh.yml
   - include: tasks/git.yml

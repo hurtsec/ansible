@@ -13,13 +13,25 @@
     recursive: yes
     update: yes
     accept_hostkey: yes
-    version: main 
+    version: main
   tags:
     - install
     - dotfiles
     - stow
+- name: Unstow .dotfiles
+  command: stow -D {{ item }}
+  args:
+    chdir: "{{ home }}/.dotfiles"
+  with_items:
+  - bin
+  - tmux
+  - zsh
+  tags:
+  - install
+  - dotfiles
+  - stow
 - name: Stow .dotfiles
-  command: stow -D {{ item }} && stow {{ item }} 
+  command: stow {{ item }} 
   args:
     chdir: "{{ home }}/.dotfiles"
   with_items:
