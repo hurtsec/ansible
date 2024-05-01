@@ -45,4 +45,6 @@
       - xclip
       - tldr
       - ripgrep
+      - koekeishiya/formulae/skhd
+      - koekeishiya/formulae/yabai
       state: absent

@@ -26,6 +26,8 @@
   - bin
   - tmux
   - zsh
+  - skhd
+  - yabai
   tags:
   - install
   - dotfiles
@@ -38,6 +40,8 @@
   - bin
   - tmux
   - zsh
+  - skhd
+  - yabai
   tags:
     - install
     - dotfiles
