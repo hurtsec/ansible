@@ -35,6 +35,7 @@
       - slack
       - warp
       - visual-studio-code
+      - raycast
       state: absent
   - name: Uninstall core utils
     ansible.builtin.homebrew:
