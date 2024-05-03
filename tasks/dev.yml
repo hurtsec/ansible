@@ -1,0 +1,5 @@
+- name: Install VS Code Extensions
+  command: code --install-extension {{ item }}
+  with_items:
+  - snyk-security.snyk-vulnerability-scanner
+  - vscodevim.vim

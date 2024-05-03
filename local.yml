@@ -25,5 +25,6 @@
   - include: tasks/slack.yml
   - include: tasks/personal-projects.yml
   - include: tasks/gui-apps.yml
-  - include: tasks/dotfiles.yml
   - include: tasks/productivity.yml
+  - include: tasks/dev.yml
+  - include: tasks/dotfiles.yml

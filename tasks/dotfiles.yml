@@ -32,6 +32,12 @@
   - install
   - dotfiles
   - stow
+- name: Unstow VS Code Settings Files
+  command: stow -D -t ~/Library/Application\ Support/Code/User/ {{ item }}
+  args:
+    chdir: "{{ home }}/.dotfiles"
+  with_items:
+  - code
 - name: Stow .dotfiles
   command: stow {{ item }} 
   args:
@@ -46,3 +52,13 @@
     - install
     - dotfiles
     - stow
+- name: Stow VS Code Settings Files
+  command: stow -t ~/Library/Application\ Support/Code/User {{ item }}
+  args:
+    chdir: "{{ home }}/.dotfiles"
+  with_items:
+  - code
+  tags:
+  - install
+  - dotfiles
+  - stow
