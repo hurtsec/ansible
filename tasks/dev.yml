@@ -1,5 +1,18 @@
+- name: Install programming languages
+  homebrew:  
+    name:
+    - go
+    - rust
+    state: present
+  tags:
+  - dev
+  - programming
 - name: Install VS Code Extensions
   command: code --install-extension {{ item }}
   with_items:
   - snyk-security.snyk-vulnerability-scanner
   - vscodevim.vim
+  - 1yib.rust-bundle
+  - golang.go
+  tags:
+  - dev
