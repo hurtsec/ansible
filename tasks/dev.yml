@@ -7,6 +7,14 @@
   tags:
   - dev
   - programming
+- name: Install CLIs
+  homebrew:
+    name:
+    - awscli
+    state: present
+  tags:
+  - dev
+  - programming
 - name: Install VS Code Extensions
   command: code --install-extension {{ item }}
   with_items:
