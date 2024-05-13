@@ -3,11 +3,22 @@
     path: "{{ arm_brew_path }}"
   register: homebrew_arm_stat
   when: ansible_architecture == "arm64"
+- name: Log arm brew path
+  hosts: all
+  tasks:
+    - name: Debug output of a variable
+      debug:
+        msg: "{{homebrew_arm_stat}}"
 - name: Check if homebrew is installed on Intel
   stat:
     path: "{{ intel_brew_path }}"
   register: homebrew_intel_stat
   when: ansible_architecture == "x86_64"
+- name: Log intel brew path
+  hosts: all
+  tasks:
+    - name: Debug output of a variable
+      debug:
 - name: Install homebrew
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   when: not homebrew_intel_stat.stat.exists and not homebrew_arm_stat.stat.exists
