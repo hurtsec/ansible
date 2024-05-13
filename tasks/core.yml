@@ -3,20 +3,17 @@
     path: "{{ arm_brew_path }}"
   register: homebrew_arm_stat
   when: ansible_architecture == "arm64"
-- name: Debug output of a variable
-  debug:
-    msg: "{{homebrew_arm_stat}}"
 - name: Check if homebrew is installed on Intel
   stat:
     path: "{{ intel_brew_path }}"
   register: homebrew_intel_stat
   when: ansible_architecture == "x86_64"
-- name: Debug output of a variable
-  debug:
-    msg: "{{homebrew_intel_stat}}"
-- name: Install homebrew
+- name: Install homebrew Apple Silicon
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  when: not homebrew_intel_stat.stat.exists and not homebrew_arm_stat.stat.exists
+  when: ansible_architecture == "arm64" and not homebrew_arm_stat.stat.exists
+- name: Install homebrew Intel
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  when: ansible_architecture == "x86_64" and not homebrew_intel_stat.stat.exists
 - name: Install necessary brew casks
   homebrew_cask:
     name: opensc
